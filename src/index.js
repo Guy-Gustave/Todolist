@@ -14,3 +14,8 @@ let newtodo = new Todolist(
 AddTodolist(todolists, newtodo);
 console.log(newtodo);
 console.log(todolists);
+todolists.forEach((item) => {
+  console.log(item);
+});
+removeTodolist(todolists, 1);
+console.log(todolists);

@@ -1,0 +1,22 @@
+$backgroundwhite: rgb(255, 252, 252);
+
+body {
+  background: $backgroundwhite;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+  width: 90%;
+  margin: 0 auto;
+}
+.header {
+  background-color: darken($backgroundwhite, 5%);
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px gray;
+  text-align: center;
+  grid-column: 1/3;
+}
