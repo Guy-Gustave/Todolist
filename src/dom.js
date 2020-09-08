@@ -5,6 +5,7 @@ const todoform = document.getElementById("todo_form");
 const closes = document.querySelectorAll(".close");
 const createtodo = document.getElementById("create_todo");
 const createproject = document.getElementById("create_project");
+const display_projects = document.getElementById("display_projects");
 
 addproject.addEventListener("click", () => {
   projectform.className = "project_form";
@@ -20,12 +21,24 @@ closes.forEach((close) => {
   });
 });
 
-createtodo.addEventListener("click", (e, createtodo) => {
-  e.preventDefault();
+const gettodovalues = () => {
   const todotitle = document.getElementById("title").value;
   const tododescription = document.getElementById("description").value;
   const todopriority = document.getElementById("priority").value;
   const tododate = document.getElementById("date").value;
-  createtodo(todotitle, tododescription, todopriority, tododate);
-});
-export { addproject, addtodo, closes };
+  return { todotitle, tododescription, todopriority, tododate };
+};
+const getprojectvalues = () => {
+  const projectname = document.getElementById("name").value;
+  return projectname;
+};
+export {
+  addproject,
+  addtodo,
+  closes,
+  createtodo,
+  gettodovalues,
+  getprojectvalues,
+  createproject,
+  display_projects,
+};

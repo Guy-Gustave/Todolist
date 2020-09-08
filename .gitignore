@@ -2,5 +2,5 @@
 # Dependency directories
 node_modules/
 
-assets/style.css.map
-dist/assets/style.scss
+**/style.css.map
+**/style.scss

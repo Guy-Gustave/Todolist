@@ -1,5 +1,10 @@
 export const AddTodolist = (target, newtodo) => {
-  newtodo.id = target[target.length - 1].id + 1;
+  if (target.length >= 1) {
+    newtodo.id = target[target.length - 1].id + 1;
+  } else {
+    newtodo.id = 0;
+  }
+
   target.push(newtodo);
   return target;
 };
