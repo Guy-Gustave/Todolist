@@ -3,4 +3,4 @@
 node_modules/
 
 assets/style.css.map
-assets/style.scss
+dist/assets/style.scss

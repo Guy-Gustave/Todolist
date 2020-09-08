@@ -1,7 +1,7 @@
 import { AddTodolist, removeTodolist } from "./addremove";
 import Todolist from "./createtodolist";
 import { project } from "./createproject";
-
+import { addproject, addtodo, closes } from "./dom";
 const todolists = [{ id: 0 }];
 
 const projects = [];
@@ -11,6 +11,8 @@ let newtodo = new Todolist(
   "2020-12-9",
   3
 );
+
+// Testing the functions
 AddTodolist(todolists, newtodo);
 console.log(newtodo);
 console.log(todolists);
