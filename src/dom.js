@@ -6,7 +6,8 @@ const closes = document.querySelectorAll(".close");
 const createtodo = document.getElementById("create_todo");
 const createproject = document.getElementById("create_project");
 const display_projects = document.getElementById("display_projects");
-
+const project_container = document.querySelectorAll(".project_name");
+const display_todolists = document.getElementById("display_todolists");
 addproject.addEventListener("click", () => {
   projectform.className = "project_form";
 });
@@ -32,6 +33,10 @@ const getprojectvalues = () => {
   const projectname = document.getElementById("name").value;
   return projectname;
 };
+const getprojectsclick = () => {
+  const projects_list_click = document.querySelectorAll(".project_name");
+  return projects_list_click;
+};
 export {
   addproject,
   addtodo,
@@ -41,4 +46,7 @@ export {
   getprojectvalues,
   createproject,
   display_projects,
+  project_container,
+  getprojectsclick,
+  display_todolists,
 };
