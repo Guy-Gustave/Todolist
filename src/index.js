@@ -20,7 +20,7 @@ import {
 const getlocalstorage = () => {
   let projects = [];
   if (localStorage.getItem('projectsList')) {
-    projects = JSON.parse(localStorage.getItem('projects_list'));
+    projects = JSON.parse(localStorage.getItem('projectsList'));
   } else {
     projects = [{ name: 'Default', todolist: [], id: 0 }];
   }
