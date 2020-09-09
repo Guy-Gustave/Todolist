@@ -112,3 +112,58 @@ body {
     color: darken($blues, 15%);
   }
 }
+.todolist_container {
+  border: 1px solid $blues;
+  border-radius: 5px;
+  margin: 1px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  vertical-align: middle;
+}
+.low {
+  background-color: rgb(245, 245, 121);
+}
+.medium {
+  background-color: rgb(245, 181, 121);
+}
+.High {
+  background-color: rgb(236, 92, 92);
+}
+.Urgent {
+  background-color: rgb(255, 0, 0);
+}
+
+.todolist_title {
+  cursor: pointer;
+  text-transform: capitalize;
+  text-align: left;
+  margin-top: 12px;
+  margin-left: 5px;
+  display: inline-block;
+}
+.todolist_todoconf {
+  margin-top: 14px;
+  button {
+    cursor: pointer;
+    margin-right: 4px;
+    border: 1px solid $backgroundwhite;
+    padding: 4px;
+    border-radius: 4px;
+    color: $backgroundwhite;
+  }
+  button:hover {
+    background-color: $backgroundwhite;
+  }
+  .todolist_edittodo {
+    background-color: rgb(143, 143, 66);
+  }
+  .todolist_deletetodo {
+    background-color: rgb(255, 72, 0);
+  }
+  .todolist_edittodo:hover {
+    color: rgb(143, 143, 66);
+  }
+  .todolist_deletetodo:hover {
+    color: rgb(255, 72, 0);
+  }
+}

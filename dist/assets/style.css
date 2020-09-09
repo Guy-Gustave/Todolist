@@ -129,4 +129,73 @@ body {
 .display_projects h2:hover {
   color: #1212dc;
 }
+
+.todolist_container {
+  border: 1px solid #4b4bf0;
+  border-radius: 5px;
+  margin: 1px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  vertical-align: middle;
+}
+
+.low {
+  background-color: #f5f579;
+}
+
+.medium {
+  background-color: #f5b579;
+}
+
+.High {
+  background-color: #ec5c5c;
+}
+
+.Urgent {
+  background-color: red;
+}
+
+.todolist_title {
+  cursor: pointer;
+  text-transform: capitalize;
+  text-align: left;
+  margin-top: 12px;
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.todolist_todoconf {
+  margin-top: 14px;
+}
+
+.todolist_todoconf button {
+  cursor: pointer;
+  margin-right: 4px;
+  border: 1px solid #fffcfc;
+  padding: 4px;
+  border-radius: 4px;
+  color: #fffcfc;
+}
+
+.todolist_todoconf button:hover {
+  background-color: #fffcfc;
+}
+
+.todolist_todoconf .todolist_edittodo {
+  background-color: #8f8f42;
+}
+
+.todolist_todoconf .todolist_deletetodo {
+  background-color: #ff4800;
+}
+
+.todolist_todoconf .todolist_edittodo:hover {
+  color: #8f8f42;
+}
+
+.todolist_todoconf .todolist_deletetodo:hover {
+  color: #ff4800;
+}
 /*# sourceMappingURL=style.css.map */

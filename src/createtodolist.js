@@ -38,11 +38,26 @@ export default class Todolist {
     }
   }
 }
+const getprio = (num) => {
+  const priobect = {
+    1: "low",
+    2: "medium",
+    3: "High",
+    4: "Urgent",
+  };
+  return priobect[num];
+};
 
-export const displaytodolists = (todolist, display_todolists) => {
+export const displaytodolists = (
+  todolist,
+  display_todolists,
+  deletemethod,
+  edittodomethod
+) => {
   const todolistContainer = document.createElement("div");
   todolistContainer.id = todolist.id;
   todolistContainer.className = "todolist_container";
+  todolistContainer.classList.add(getprio(todolist.priority));
   display_todolists.appendChild(todolistContainer);
 
   const todolisttitle = document.createElement("h2");
@@ -50,18 +65,31 @@ export const displaytodolists = (todolist, display_todolists) => {
   todolisttitle.innerHTML = todolist.title;
   todolistContainer.appendChild(todolisttitle);
 
-  const description = document.createElement("p");
-  description.className = "todolist_desc";
-  description.innerHTML = todolist.description;
-  todolistContainer.appendChild(description);
-
   const duedate = document.createElement("p");
   duedate.className = "todolist_date";
   duedate.innerHTML = todolist.dueDate;
   todolistContainer.appendChild(duedate);
 
-  const priority = document.createElement("p");
-  priority.className = "todolist_priority";
-  priority.innerHTML = todolist.priority;
-  todolistContainer.appendChild(priority);
+  const todoconf = document.createElement("div");
+  todoconf.className = "todolist_todoconf";
+  todolistContainer.appendChild(todoconf);
+
+  const edittodo = document.createElement("button");
+  edittodo.className = "todolist_edittodo";
+  edittodo.innerHTML = "Edit";
+  edittodo.value = todolist.id;
+  edittodo.onclick = edittodomethod;
+  todoconf.appendChild(edittodo);
+
+  const deletetodo = document.createElement("button");
+  deletetodo.className = "todolist_deletetodo";
+  deletetodo.innerHTML = "delete";
+  deletetodo.value = todolist.id;
+  deletetodo.onclick = deletemethod;
+  todoconf.appendChild(deletetodo);
+
+  const description = document.createElement("p");
+  description.className = "todolist_desc";
+  description.innerHTML = todolist.description;
+  todolistContainer.appendChild(description);
 };
