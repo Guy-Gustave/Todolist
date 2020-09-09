@@ -8,8 +8,8 @@ const createproject = document.getElementById("create_project");
 const display_projects = document.getElementById("display_projects");
 const project_container = document.querySelectorAll(".project_name");
 const display_todolists = document.getElementById("display_todolists");
-// const create_todo_button = document.querySelector(".createtodo_buttons");
-// const edit_todo_button = document.querySelector(".edittodo_buttons");
+const tododetails = document.getElementById("tododetails");
+const details = document.querySelector(".details");
 addproject.addEventListener("click", () => {
   projectform.className = "project_form";
 });
@@ -22,6 +22,7 @@ closes.forEach((close) => {
     e.preventDefault();
     todoform.className = "none";
     projectform.className = "none";
+    tododetails.className = "none";
   });
 });
 const accestodovalues = () => {
@@ -31,7 +32,10 @@ const accestodovalues = () => {
   const tododate = document.getElementById("date");
   return { todotitle, tododescription, todopriority, tododate };
 };
-
+const getdetails = () => {
+  const tododetails = document.querySelectorAll(".todolist_title");
+  return tododetails;
+};
 const gettodovalues = () => {
   let val = accestodovalues();
   let [todotitle, tododescription, todopriority, tododate] = [
@@ -81,6 +85,7 @@ export {
   getdeletebutton,
   posttodovalues,
   todoform,
-  // create_todo_button,
-  // edit_todo_button,
+  tododetails,
+  getdetails,
+  details,
 };

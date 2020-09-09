@@ -52,7 +52,8 @@ export const displaytodolists = (
   todolist,
   display_todolists,
   deletemethod,
-  edittodomethod
+  edittodomethod,
+  showdetails
 ) => {
   const todolistContainer = document.createElement("div");
   todolistContainer.id = todolist.id;
@@ -63,6 +64,7 @@ export const displaytodolists = (
   const todolisttitle = document.createElement("h2");
   todolisttitle.className = "todolist_title";
   todolisttitle.innerHTML = todolist.title;
+  todolisttitle.onclick = showdetails;
   todolistContainer.appendChild(todolisttitle);
 
   const duedate = document.createElement("p");
@@ -87,9 +89,4 @@ export const displaytodolists = (
   deletetodo.value = todolist.id;
   deletetodo.onclick = deletemethod;
   todoconf.appendChild(deletetodo);
-
-  const description = document.createElement("p");
-  description.className = "todolist_desc";
-  description.innerHTML = todolist.description;
-  todolistContainer.appendChild(description);
 };

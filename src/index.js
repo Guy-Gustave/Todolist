@@ -13,8 +13,9 @@ import {
   getprojectsclick,
   posttodovalues,
   todoform,
-  create_todo_button,
-  edit_todo_button,
+  tododetails,
+  getdetails,
+  details,
 } from "./dom";
 
 const projects_list = [{ name: "Default", todolist: [], id: 0 }];
@@ -29,7 +30,10 @@ const adddeletetotodos = (e) => {
     displaytodolists
   );
 };
-
+const showdetails = (e) => {
+  tododetails.className = "todo_details";
+  details.classList.add(e.target.parentElement.classList[1]);
+};
 const addedittotodos = (e) => {
   let idx = parseInt(e.target.value);
   const index = projects_list[selectedproject].todolist.findIndex(
@@ -54,9 +58,10 @@ const add_to_chosen_object = (target, id, myobject, todo) => {
 const desplay_items = (item_div, items_list, item_method) => {
   item_div.innerHTML = "";
   items_list.forEach((item) => {
-    item_method(item, item_div, adddeletetotodos, addedittotodos);
+    item_method(item, item_div, adddeletetotodos, addedittotodos, showdetails);
   });
 };
+
 createtodo.addEventListener("click", (e) => {
   e.preventDefault();
   let todo = gettodovalues();
@@ -101,6 +106,7 @@ desplay_items(
   projects_list[selectedproject].todolist,
   displaytodolists
 );
+
 let projectclick = getprojectsclick();
 
 const addeventtoclickproject = () => {
