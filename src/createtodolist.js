@@ -1,29 +1,11 @@
 export default class Todolist {
-  constructor(
-    title,
-    description,
-    dueDate,
-    priority,
-    notes = [],
-    checklist = [],
-    id = null
-  ) {
-    [
-      this.title,
-      this.description,
-      this.dueDate,
-      this.priority,
-      this.notes = [],
-      this.checklist = [],
-      this.id = null,
-    ] = [
+  constructor(title, description, dueDate, priority, id = null) {
+    [this.title, this.description, this.dueDate, this.priority, this.id] = [
       title,
       description,
       dueDate,
       priority,
-      (notes = []),
-      (checklist = []),
-      (id = null),
+      id,
     ];
   }
 

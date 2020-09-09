@@ -16,14 +16,25 @@ import {
   tododetails,
   getdetails,
   details,
+  projectform,
 } from "./dom";
 
-const projects_list = [{ name: "Default", todolist: [], id: 0 }];
+const getlocalstorage = () => {
+  let projects = [];
+  if (localStorage.getItem("projects_list")) {
+    projects = JSON.parse(localStorage.getItem("projects_list"));
+  } else {
+    projects = [{ name: "Default", todolist: [], id: 0 }];
+  }
+  return projects;
+};
+const projects_list = getlocalstorage();
 let selectedtodo = null;
 let selectedproject = 0;
 const adddeletetotodos = (e) => {
   let idx = parseInt(e.target.value);
   removeTodolist(projects_list[selectedproject].todolist, idx);
+  localStorage.setItem("projects_list", JSON.stringify(projects_list));
   desplay_items(
     display_todolists,
     projects_list[selectedproject].todolist,
@@ -73,16 +84,20 @@ createtodo.addEventListener("click", (e) => {
       todo.todopriority
     );
     add_to_chosen_object(projects_list, selectedproject, "todolist", newtodo);
+    localStorage.setItem("projects_list", JSON.stringify(projects_list));
+    console.log(JSON.parse(localStorage.getItem("projects_list")));
   } else if (createtodo.className === "edittodo_buttons") {
     let editedtodo = new Todolist(
       todo.todotitle,
       todo.tododescription,
       todo.tododate,
-      todo.todopriority
+      todo.todopriority,
+      selectedtodo
     );
     projects_list[selectedproject].todolist[selectedtodo] = editedtodo;
+    localStorage.setItem("projects_list", JSON.stringify(projects_list));
   }
-
+  todoform.className = "none";
   desplay_items(
     display_todolists,
     projects_list[selectedproject].todolist,
@@ -98,6 +113,8 @@ createproject.addEventListener("click", (e) => {
   desplay_items(display_projects, projects_list, displayprojects);
   projectclick = getprojectsclick();
   addeventtoclickproject();
+  localStorage.setItem("projects_list", JSON.stringify(projects_list));
+  projectform.className = "none";
 });
 
 desplay_items(display_projects, projects_list, displayprojects);
