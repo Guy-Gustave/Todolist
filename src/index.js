@@ -1,140 +1,151 @@
-import { AddTodolist, removeTodolist } from "./addremove";
-import Todolist, { displaytodolists } from "./createtodolist";
-import { Project, displayprojects } from "./createproject";
+import { AddTodolist, removeTodolist } from './addremove';
+import Todolist, { displaytodolists } from './createtodolist';
+import { Project, displayprojects } from './createproject';
 import {
-  addproject,
-  addtodo,
-  closes,
   gettodovalues,
   createtodo,
   getprojectvalues,
   createproject,
-  display_projects,
+  displayProjects,
   getprojectsclick,
   posttodovalues,
   todoform,
   tododetails,
-  getdetails,
   details,
   projectform,
-} from "./dom";
+  showdetails,
+  displayTodolists,
+} from './dom';
 
 const getlocalstorage = () => {
   let projects = [];
-  if (localStorage.getItem("projects_list")) {
-    projects = JSON.parse(localStorage.getItem("projects_list"));
+  if (localStorage.getItem('projectsList')) {
+    projects = JSON.parse(localStorage.getItem('projects_list'));
   } else {
-    projects = [{ name: "Default", todolist: [], id: 0 }];
+    projects = [{ name: 'Default', todolist: [], id: 0 }];
   }
   return projects;
 };
-const projects_list = getlocalstorage();
+const projectsList = getlocalstorage();
 let selectedtodo = null;
 let selectedproject = 0;
+/* eslint no-use-before-define: 0 */
+const desplayItems = (itemDiv, itemsList, itemMethod) => {
+  itemDiv.innerHTML = '';
+  itemsList.forEach((item) => {
+    itemMethod(item, itemDiv, adddeletetotodos, addedittotodos, showdet);
+  });
+};
 const adddeletetotodos = (e) => {
-  let idx = parseInt(e.target.value);
-  removeTodolist(projects_list[selectedproject].todolist, idx);
-  localStorage.setItem("projects_list", JSON.stringify(projects_list));
-  desplay_items(
-    display_todolists,
-    projects_list[selectedproject].todolist,
-    displaytodolists
-  );
-};
-const showdetails = (e) => {
-  tododetails.className = "todo_details";
-  details.classList.add(e.target.parentElement.classList[1]);
-};
-const addedittotodos = (e) => {
-  let idx = parseInt(e.target.value);
-  const index = projects_list[selectedproject].todolist.findIndex(
-    (x) => x.id === idx
-  );
-  selectedtodo = index;
-  let editedtodo = projects_list[selectedproject].todolist[index];
-  todoform.className = "todo_form";
-  posttodovalues(editedtodo.title, editedtodo.description);
-  desplay_items(
-    display_todolists,
-    projects_list[selectedproject].todolist,
-    displaytodolists
+  const idx = parseInt(e.target.value, 10);
+  removeTodolist(projectsList[selectedproject].todolist, idx);
+  localStorage.setItem('projectsList', JSON.stringify(projectsList));
+  desplayItems(
+    displayTodolists,
+    projectsList[selectedproject].todolist,
+    displaytodolists,
   );
 };
 
-const add_to_chosen_object = (target, id, myobject, todo) => {
+const showdet = (e) => {
+  const idx = parseInt(e.target.parentElement.id, 10);
+  const index = projectsList[selectedproject].todolist.findIndex(
+    (x) => x.id === idx,
+  );
+
+  tododetails.className = 'todo_details';
+  details.classList.add(e.target.parentElement.classList[1]);
+
+  const det = showdetails();
+  const stodo = projectsList[selectedproject].todolist[index];
+  det.title.innerHTML = stodo.title;
+  det.priority.innerHTML = stodo.priority;
+  det.date.innerHTML = stodo.dueDate;
+  det.description.innerHTML = stodo.description;
+};
+
+const addedittotodos = (e) => {
+  const idx = parseInt(e.target.value, 10);
+  const index = projectsList[selectedproject].todolist.findIndex(
+    (x) => x.id === idx,
+  );
+  selectedtodo = index;
+  const editedtodo = projectsList[selectedproject].todolist[index];
+  todoform.className = 'todo_form';
+  posttodovalues(editedtodo.title, editedtodo.description);
+  desplayItems(
+    displayTodolists,
+    projectsList[selectedproject].todolist,
+    displaytodolists,
+  );
+};
+
+const addToChosenObject = (target, id, myobject, todo) => {
   const index = target.findIndex((x) => x.id === id);
   AddTodolist(target[index][myobject], todo);
 };
 
-const desplay_items = (item_div, items_list, item_method) => {
-  item_div.innerHTML = "";
-  items_list.forEach((item) => {
-    item_method(item, item_div, adddeletetotodos, addedittotodos, showdetails);
-  });
-};
-
-createtodo.addEventListener("click", (e) => {
+createtodo.addEventListener('click', (e) => {
   e.preventDefault();
-  let todo = gettodovalues();
-  if (createtodo.className === "createtodo_buttons") {
-    let newtodo = new Todolist(
-      todo.todotitle,
-      todo.tododescription,
-      todo.tododate,
-      todo.todopriority
-    );
-    add_to_chosen_object(projects_list, selectedproject, "todolist", newtodo);
-    localStorage.setItem("projects_list", JSON.stringify(projects_list));
-    console.log(JSON.parse(localStorage.getItem("projects_list")));
-  } else if (createtodo.className === "edittodo_buttons") {
-    let editedtodo = new Todolist(
+  const todo = gettodovalues();
+  if (createtodo.className === 'createtodo_buttons') {
+    const newtodo = new Todolist(
       todo.todotitle,
       todo.tododescription,
       todo.tododate,
       todo.todopriority,
-      selectedtodo
     );
-    projects_list[selectedproject].todolist[selectedtodo] = editedtodo;
-    localStorage.setItem("projects_list", JSON.stringify(projects_list));
+    addToChosenObject(projectsList, selectedproject, 'todolist', newtodo);
+    localStorage.setItem('projectsList', JSON.stringify(projectsList));
+  } else if (createtodo.className === 'edittodo_buttons') {
+    const editedtodo = new Todolist(
+      todo.todotitle,
+      todo.tododescription,
+      todo.tododate,
+      todo.todopriority,
+      selectedtodo,
+    );
+    projectsList[selectedproject].todolist[selectedtodo] = editedtodo;
+    localStorage.setItem('projectsList', JSON.stringify(projectsList));
   }
-  todoform.className = "none";
-  desplay_items(
-    display_todolists,
-    projects_list[selectedproject].todolist,
-    displaytodolists
+  todoform.className = 'none';
+  desplayItems(
+    displayTodolists,
+    projectsList[selectedproject].todolist,
+    displaytodolists,
   );
 });
 
-createproject.addEventListener("click", (e) => {
+createproject.addEventListener('click', (e) => {
   e.preventDefault();
-  let project = getprojectvalues();
-  let newproject = Project(project);
-  AddTodolist(projects_list, newproject);
-  desplay_items(display_projects, projects_list, displayprojects);
+  const project = getprojectvalues();
+  const newproject = Project(project);
+  AddTodolist(projectsList, newproject);
+  desplayItems(displayProjects, projectsList, displayprojects);
   projectclick = getprojectsclick();
   addeventtoclickproject();
-  localStorage.setItem("projects_list", JSON.stringify(projects_list));
-  projectform.className = "none";
+  localStorage.setItem('projectsList', JSON.stringify(projectsList));
+  projectform.className = 'none';
 });
 
-desplay_items(display_projects, projects_list, displayprojects);
-desplay_items(
-  display_todolists,
-  projects_list[selectedproject].todolist,
-  displaytodolists
+desplayItems(displayProjects, projectsList, displayprojects);
+desplayItems(
+  displayTodolists,
+  projectsList[selectedproject].todolist,
+  displaytodolists,
 );
 
 let projectclick = getprojectsclick();
 
 const addeventtoclickproject = () => {
   projectclick.forEach((project) => {
-    project.addEventListener("click", (e) => {
+    project.addEventListener('click', (e) => {
       e.preventDefault();
-      selectedproject = parseInt(e.target.parentElement.id);
-      desplay_items(
-        display_todolists,
-        projects_list[selectedproject].todolist,
-        displaytodolists
+      selectedproject = parseInt(e.target.parentElement.id, 10);
+      desplayItems(
+        displayTodolists,
+        projectsList[selectedproject].todolist,
+        displaytodolists,
       );
     });
   });

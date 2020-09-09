@@ -8,66 +8,55 @@ export default class Todolist {
       id,
     ];
   }
-
-  priorityUp() {
-    if (this.priority < 4) {
-      priority += 1;
-    }
-  }
-  priorityDown() {
-    if (this.priority > 0) {
-      priority = priority - 1;
-    }
-  }
 }
 const getprio = (num) => {
   const priobect = {
-    1: "low",
-    2: "medium",
-    3: "High",
-    4: "Urgent",
+    1: 'low',
+    2: 'medium',
+    3: 'High',
+    4: 'Urgent',
   };
   return priobect[num];
 };
 
 export const displaytodolists = (
   todolist,
-  display_todolists,
+  displayTodolists,
   deletemethod,
   edittodomethod,
-  showdetails
+  showdetails,
 ) => {
-  const todolistContainer = document.createElement("div");
+  const todolistContainer = document.createElement('div');
   todolistContainer.id = todolist.id;
-  todolistContainer.className = "todolist_container";
+  todolistContainer.className = 'todolist_container';
   todolistContainer.classList.add(getprio(todolist.priority));
-  display_todolists.appendChild(todolistContainer);
+  displayTodolists.appendChild(todolistContainer);
 
-  const todolisttitle = document.createElement("h2");
-  todolisttitle.className = "todolist_title";
+  const todolisttitle = document.createElement('h2');
+  todolisttitle.className = 'todolist_title';
   todolisttitle.innerHTML = todolist.title;
   todolisttitle.onclick = showdetails;
   todolistContainer.appendChild(todolisttitle);
 
-  const duedate = document.createElement("p");
-  duedate.className = "todolist_date";
+  const duedate = document.createElement('p');
+  duedate.className = 'todolist_date';
   duedate.innerHTML = todolist.dueDate;
   todolistContainer.appendChild(duedate);
 
-  const todoconf = document.createElement("div");
-  todoconf.className = "todolist_todoconf";
+  const todoconf = document.createElement('div');
+  todoconf.className = 'todolist_todoconf';
   todolistContainer.appendChild(todoconf);
 
-  const edittodo = document.createElement("button");
-  edittodo.className = "todolist_edittodo";
-  edittodo.innerHTML = "Edit";
+  const edittodo = document.createElement('button');
+  edittodo.className = 'todolist_edittodo';
+  edittodo.innerHTML = 'Edit';
   edittodo.value = todolist.id;
   edittodo.onclick = edittodomethod;
   todoconf.appendChild(edittodo);
 
-  const deletetodo = document.createElement("button");
-  deletetodo.className = "todolist_deletetodo";
-  deletetodo.innerHTML = "delete";
+  const deletetodo = document.createElement('button');
+  deletetodo.className = 'todolist_deletetodo';
+  deletetodo.innerHTML = 'delete';
   deletetodo.value = todolist.id;
   deletetodo.onclick = deletemethod;
   todoconf.appendChild(deletetodo);

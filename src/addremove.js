@@ -8,8 +8,8 @@ export const AddTodolist = (target, newtodo) => {
   target.push(newtodo);
   return target;
 };
-export const removeTodolist = (target, todo_id) => {
-  const index = target.findIndex((x) => x.id === todo_id);
+export const removeTodolist = (target, todoId) => {
+  const index = target.findIndex((x) => x.id === todoId);
   target.splice(index, 1);
   return target;
 };
