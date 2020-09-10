@@ -8,8 +8,12 @@ body {
   -ms-grid-columns: 1fr 2fr;
       grid-template-columns: 1fr 2fr;
   grid-gap: 10px;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
+  border: 1px solid gray;
+  padding: 10px;
+  background: #eeaeca;
+  background: radial-gradient(circle, #eeaeca 0%, #94bbe9 100%);
 }
 
 .header {

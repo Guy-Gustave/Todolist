@@ -72,7 +72,12 @@ const addedittotodos = (e) => {
   selectedtodo = index;
   const editedtodo = projectsList[selectedproject].todolist[index];
   todoform.className = 'todo_form';
-  posttodovalues(editedtodo.title, editedtodo.description);
+  posttodovalues(
+    editedtodo.title,
+    editedtodo.description,
+    editedtodo.priority,
+    editedtodo.dueDate,
+  );
   desplayItems(
     displayTodolists,
     projectsList[selectedproject].todolist,
